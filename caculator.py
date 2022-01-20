@@ -11,9 +11,14 @@ while True:
     if ipa == '1':
         hName = socket.gethostname()
         IPaddress = socket.gethostbyname(hName)
+        Class_conveter = IPaddress[:3]
+        BRange = range(128, 191)
         print('\n''Host Name is: ' + hName)
         print('Computer IP Address is: ' + IPaddress)
-        print()
+        if Class_conveter == BRange:
+            print('Class: ' + 'B')
+        else:
+            print("lol didn't work")
         break
 
     # takes the output of "ipa" and if it's 2 it tries to show the subnet, subnet mask, brodcast ip, id address, classes. 
@@ -21,8 +26,8 @@ while True:
         # user enters the ip address here, and if there is added a subnet it needs to take that in consiterration
         input2 = (input('Insert IP address: '))# user needs to insert a custom ip address
         
-        class IPCaculator(object):
-            def
+        #class IPCaculator(object):
+        #    def
         
     elif ipa == 'secret word':
         x = input('what do you wanna do?: ')
