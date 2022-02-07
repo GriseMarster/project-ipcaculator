@@ -1,4 +1,5 @@
 import socket, sys, subprocess
+from turtle import clear
 from typing import ContextManager
 
 
@@ -37,18 +38,29 @@ while True:
         input2 = (input('Insert IP address: '))# user needs to insert a custom ip address
         Class_conveter = (input2[:3])
         BClass = int(Class_conveter)
+        IPB = input2.split('.')
         
         print('Your IP is: ' + input2)
-
         if BClass in range(1, 126, 1):
             print('Class is: A')
-        
+            print(IPB)
+
         elif BClass in range(128, 191, 1):
             print('Class is: B')
-
+            print(IPB)
+            
         elif BClass in range(192, 223, 1):
             print('Class is: C')
-        
+            print(IPB)
+
+        elif BClass in range(224, 239, 1):
+            print('Class is: D')
+            print(IPB)
+
+        elif BClass in range(240, 255, 1):
+            print('Class is: E')
+            print(IPB)
+
         else:
           print("lol didn't work ")
 
@@ -63,7 +75,7 @@ while True:
     else:
         # if the user doesn't chosses between 1 or 2 they will get and error that they have to chosse between 1 and 2
         print('\n' 'incorrect number, you need to chosse between 1 to 3.')
-
+        continue
 
 
 
