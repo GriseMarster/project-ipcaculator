@@ -8,33 +8,41 @@ IPaddress = socket.gethostbyname(hName)
 def CustomIP():
     input2 = (input('Insert IP address: '))# user needs to insert a custom ip address 
     IP = input2.split('/')[0]
-    SubnetMask = input2.split('/')[-1]
+    Loopback = IP.split(".")[0]
+    prefix = int(input2.split('/')[-1])
     ClassNum = ["A", "B", "C", "D", "E"] # A list over the classes that are in use in IPv4 
-    ClassConveter = int(input2.partition('.')[0]) # Takes the first octet and makes it an integer
-    SubnetmaskList = [0,128,192,224,240,248,252,254,255]
-
+    SubnetmaskList = ["0.0.0.0","128.0.0.0","192.0.0.0","224.0.0.0","240.0.0.0","248.0.0.0","252.0.0.0","254.0.0.0","255.0.0.0","255.128.0.0","255.192.0.0","255.224.0.0","255.240.0.0","255.248.0.0","255.252.0.0","255.254.0.0","255.255.0.0","255.255.128.0","255.255.192.0","255.255.224.0","255.255.240.0","255.255.248.0","255.255.252.0","255.255.254.0","255.255.255.0","255.255.255.128","255.255.255.192","255.255.255.224","255.255.255.240","255.255.255.248","255.255.255.252","255.255.255.254","255.255.255.255"]
+    
     os.system("cls")
     print('================================')
     print('IP: ' + IP)
-    print('Subenetmask:',)
-    if ClassConveter not in range(1, 126): # checks which class the input are in
-        if ClassConveter not in range(128, 191):
-            if ClassConveter not in range(192, 223):
-                if ClassConveter not in range(224, 239):
-                    if ClassConveter not in range (240, 255):
-                        print("Class: not valid")
+    print('Subnetmask:', SubnetmaskList[prefix])
+    print('Prefix:',prefix)
+    if prefix not in range(0, 4): # checks which class the input are in
+        if prefix not in range(5, 7):
+            if prefix not in range(8, 15) or Loopback == "127":
+                if not Loopback == "127" and prefix != "8":
+                    if prefix not in range(16, 23):
+                        if prefix not in range (24, 32):
+                            print("Class: not valid")
+                        else:
+                            print('Class:',ClassNum[2])
                     else:
-                        print('Class:',ClassNum[4])
-                else:
-                    print("Class:",ClassNum[3])
+                        print("Class:",ClassNum[1])
+                else:        
+                    print("Class:",ClassNum[0])
+                    print("Loopback Address")
             else:
-                print("Class:",ClassNum[2])
+                print("Class:",ClassNum[0])
         else:
-            print("Class:",ClassNum[1])
+            print("Class: Undefind")
     else:
-        print("Class:",ClassNum[0])
-    print('Prefix:',SubnetMask)
+        print("Class:",ClassNum[3])
+    NOH=[32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]
+    print("Number of IP's:","{:,}".format(2**NOH[prefix]))
+    print("Number of Hosts:","{:,}".format(2**NOH[prefix]-2))
     print('================================')
+    
 
 
 def DefaultIP():
