@@ -1,0 +1,10 @@
+================================
+IP: 192.168.0.1
+Subnetmask: 255.255.255.0
+Prefix: 24
+Class: C
+Number of IP's: 256
+Number of Hosts: 254
+Subnet ID: 192.168.0.0
+Broadcast address: 192.168.0.255
+================================

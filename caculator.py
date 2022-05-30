@@ -1,6 +1,19 @@
 import socket, sys, subprocess, os
 
 def CustomIP():
+    global input2
+    global IP
+    global Loopback
+    global prefix
+    global ClassNum
+    global Subnetmask
+    global SubnetmaskList
+    global NOH
+    global Subnet
+    global Slist
+    global IPlist
+    global Broadcast
+    global x
     input2 = (input('Insert IP address: '))# user needs to insert a custom ip address 
     IP = input2.split('/')[0]
     Loopback = IP.split(".")[0]
@@ -22,20 +35,22 @@ def CustomIP():
                 if not Loopback == "127" and prefix != "8":
                     if prefix not in range(16, 24):
                         if prefix not in range (24, 33):
-                            print("Class: not valid")
+                            x = "not valid"
                         else:
-                            print('Class:',ClassNum[2])
+                            x = ClassNum[2]
                     else:
-                        print("Class:",ClassNum[1])
+                        x = ClassNum[1]
                 else:        
-                    print("Class:",ClassNum[0])
+                    x = ClassNum[0]
                     print("Loopback Address")
             else:
-                print("Class:",ClassNum[0])
+                x = ClassNum[0]
         else:
-            print("Class: Undefind")
+            x = 'Undefind'
     else:
-        print("Class:",ClassNum[3])
+        x = ClassNum[3]
+    print('Class:', x)
+
     NOH=[32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]
     print("Number of IP's:","{:,}".format(2**NOH[prefix]))
     print("Number of Hosts:","{:,}".format(2**NOH[prefix]-2))
@@ -48,8 +63,84 @@ def CustomIP():
     print("Subnet ID:",Subnet)
     print("Broadcast address: {0}".format('.'.join(map(str, Broadcast))))
     print('================================')
-    
+    SaveToServer()
 
+def SaveToServer():
+    SaveInput = input('Do you wanna save this?: ')
+    if SaveInput == 'yes':
+        my_file = open("IPOutput.txt","w+")
+        my_file.write('================================\n')
+        my_file.write('IP: ' + IP+'\n')
+        my_file.write('Subnetmask: '+Subnetmask+'\n')
+        my_file.write('Prefix: '+str(prefix)+'\n')
+        my_file.write('Class: '+x+'\n')
+        my_file.write("Number of IP's: "+"{:,}".format(2**NOH[prefix])+'\n')
+        my_file.write("Number of Hosts: "+"{:,}".format(2**NOH[prefix]-2)+'\n')
+        my_file.write("Subnet ID: "+Subnet+'\n')
+        my_file.write("Broadcast address: {0}".format('.'.join(map(str, Broadcast)))+'\n')
+        my_file.write('================================')
+    else:
+        return()
+    import shutil
+    import os
+    source = os.listdir("/tmp/")
+    destination = "/tmp/newfolder/"
+    for files in source:
+        if files.endswith(".txt"):
+            shutil.copy(files,destination)
+
+    ###########
+    shutil.copyfile ( src , dest )
+    # copy data from src to dest 
+
+    # both names must be files.
+
+    # copy files by name 
+    import shutil  
+    shutil.copyfile('/path/to/file', '/path/to/other/phile') 
+    
+    ############
+    shutil.move
+    # recursively move a file or directory (src) to another location (dst).
+
+    # if the destination is a directory or a symlink to a directory, then src is moved
+    # inside that directory.
+
+    # the destination directory must not already exist.
+
+    # this would move files ending with .txt to the destination path
+    import shutil
+    import os
+    source = os.listdir("/tmp/")
+    destination = "/tmp/newfolder/"
+    for files in source:
+        if files.endswith(".txt"):
+            shutil.move(files,destination)
+
+    ####################
+    shutil.copytree ( src , dest )
+    # recursively copy the entire directory tree rooted at src to dest. 
+
+    # dest must not already exist. 
+
+    # errors are reported to standard output.
+
+    ####################
+    import shutil
+    import os
+    SOURCE = "samples"
+    BACKUP = "samples-bak"
+    # create a backup directory
+    shutil.copytree(SOURCE, BACKUP)
+    print(os.listdir(BACKUP))
+
+    ####################
+    shutil.rmtree ( path )
+
+    # recursively delete a directory tree.
+    # This removes the directory 'three' and anything beneath it in the filesystem.
+    import shutil
+    shutil.rmtree('one/two/three')
 
 def DefaultIP():
     hName = socket.gethostname()
