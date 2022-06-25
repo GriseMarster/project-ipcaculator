@@ -67,7 +67,7 @@ def CustomIP():
 
 def SaveToServer():
     SaveInput = input('Do you wanna save this?: ')
-    if SaveInput == 'yes':
+    if SaveInput == 'y':
         my_file = open("IPOutput.txt","w+")
         my_file.write('================================\n')
         my_file.write('IP: ' + IP+'\n')
@@ -81,66 +81,6 @@ def SaveToServer():
         my_file.write('================================')
     else:
         return()
-    import shutil
-    import os
-    source = os.listdir("/tmp/")
-    destination = "/tmp/newfolder/"
-    for files in source:
-        if files.endswith(".txt"):
-            shutil.copy(files,destination)
-
-    ###########
-    shutil.copyfile ( src , dest )
-    # copy data from src to dest 
-
-    # both names must be files.
-
-    # copy files by name 
-    import shutil  
-    shutil.copyfile('/path/to/file', '/path/to/other/phile') 
-    
-    ############
-    shutil.move
-    # recursively move a file or directory (src) to another location (dst).
-
-    # if the destination is a directory or a symlink to a directory, then src is moved
-    # inside that directory.
-
-    # the destination directory must not already exist.
-
-    # this would move files ending with .txt to the destination path
-    import shutil
-    import os
-    source = os.listdir("/tmp/")
-    destination = "/tmp/newfolder/"
-    for files in source:
-        if files.endswith(".txt"):
-            shutil.move(files,destination)
-
-    ####################
-    shutil.copytree ( src , dest )
-    # recursively copy the entire directory tree rooted at src to dest. 
-
-    # dest must not already exist. 
-
-    # errors are reported to standard output.
-
-    ####################
-    import shutil
-    import os
-    SOURCE = "samples"
-    BACKUP = "samples-bak"
-    # create a backup directory
-    shutil.copytree(SOURCE, BACKUP)
-    print(os.listdir(BACKUP))
-
-    ####################
-    shutil.rmtree ( path )
-
-    # recursively delete a directory tree.
-    # This removes the directory 'three' and anything beneath it in the filesystem.
-    import shutil
-    shutil.rmtree('one/two/three')
 
 def DefaultIP():
     hName = socket.gethostname()
@@ -153,6 +93,7 @@ def DefaultIP():
         
     if BClass in range(1, 126, 1):
         print('Class is: A')
+
         return()
 
     elif BClass in range(128, 191, 1):
